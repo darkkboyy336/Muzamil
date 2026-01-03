@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Muzamil Majeed | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Load external config file -->
+    <script src="config.env.js" defer></script>
+    
     <style>
-        /* CSS remains exactly as in your original code */
+        /* ALL YOUR EXISTING CSS HERE - Keep it exactly as before */
         * {
             margin: 0;
             padding: 0;
@@ -582,34 +586,6 @@
             100% { background-position: -200% 0; }
         }
 
-        .secret-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--dark-card);
-            padding: 30px;
-            border-radius: var(--radius);
-            border: 1px solid var(--dark-border);
-            z-index: 1002;
-            display: none;
-            animation: slideUp 0.3s ease;
-        }
-
-        .secret-input {
-            width: 100%;
-            padding: 14px;
-            background: var(--darker-card);
-            border: 1px solid var(--dark-border);
-            border-radius: 8px;
-            color: var(--dark-text);
-            font-size: 18px;
-            text-align: center;
-            letter-spacing: 4px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
         .hidden-admin-area {
             position: fixed;
             top: 0;
@@ -619,26 +595,6 @@
             background: transparent;
             z-index: 9999;
             cursor: pointer;
-        }
-
-        .tap-counter {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .tap-counter.show {
-            opacity: 1;
         }
 
         .lock-icon {
@@ -658,17 +614,12 @@
             color: var(--accent);
         }
     </style>
-    
-    <!-- HIDDEN ENV CONFIGURATION (Base64 Encoded) -->
-    <script id="envConfig" type="application/json" style="display:none;">
-        eyJQSU4iOiIxMzExIiwiQkFDS1VQX1BJTlMiOlsiMjAyNCIsIk1VWkFNSUwiLCIxMzExMjAyNCJdLCJTRUNVUklUWV9TRVRUSU5HUyI6eyJNQVhfQVRURU1QVFMiOjMsIkxPQ0tPVVRfVElNRSI6MzAwMDAwLCJTRVNTSU9OX1RJTUUiOjE4MDAwMDB9fQ==
-    </script>
 </head>
 <body>
-    <!-- Hidden Admin Access Area (Invisible) -->
+    <!-- Hidden Admin Access Area -->
     <div class="hidden-admin-area" id="secretAdminArea"></div>
 
-    <!-- Lock Icon (Very Subtle) -->
+    <!-- Lock Icon -->
     <div class="lock-icon" id="lockIcon" title="Admin Access">
         <i class="fas fa-lock"></i>
     </div>
@@ -678,37 +629,19 @@
         <div class="profile-header">
             <div class="profile-info">
                 <div class="profile-pic-container">
-                    <img src="https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg" 
+                    <img src="" 
                          alt="Muzamil Majeed" 
                          class="profile-pic"
-                         id="profileImage"
-                         onerror="this.src='https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg'">
+                         id="profileImage">
                 </div>
                 
                 <div class="profile-stats">
-                    <h1 class="profile-name" id="profileName">Muzamil Majeed</h1>
-                    <p class="profile-bio" id="profileBio">MBA Professional | MSR at Brakes India Pvt Limited</p>
+                    <h1 class="profile-name" id="profileName">Loading...</h1>
+                    <p class="profile-bio" id="profileBio">Loading...</p>
                     
-                    <!-- Contact Icons -->
-                    <div class="contact-icons">
-                        <a href="tel:+917889737018" class="contact-icon" title="Call">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                        <a href="mailto:Muzamilmajeed23@Outlook.com" class="contact-icon" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/muzamil-majeed-9b00361b2" 
-                           target="_blank" 
-                           class="contact-icon" 
-                           title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://wa.me/+917889737018" 
-                           target="_blank" 
-                           class="contact-icon" 
-                           title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                    <!-- Contact Icons will be populated by JavaScript -->
+                    <div class="contact-icons" id="contactIcons">
+                        <!-- Will be filled dynamically -->
                     </div>
                     
                     <div class="profile-highlights">
@@ -747,16 +680,7 @@
                     </span>
                 </div>
                 <div class="timeline" id="educationContent">
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="edu1Title">MBA</div>
-                        <div class="timeline-subtitle" id="edu1Institution">Maharaja Ranjit Singh Punjab Technical University</div>
-                        <div class="timeline-desc" id="edu1Description">Master of Business Administration</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="edu2Title">BBA</div>
-                        <div class="timeline-subtitle" id="edu2Institution">Cluster University Srinagar</div>
-                        <div class="timeline-desc" id="edu2Description">Bachelor of Business Administration</div>
-                    </div>
+                    <!-- Will be filled dynamically -->
                 </div>
             </div>
 
@@ -772,16 +696,7 @@
                     </span>
                 </div>
                 <div class="timeline" id="experienceContent">
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="exp1Title">MSR</div>
-                        <div class="timeline-subtitle" id="exp1Company">Brakes India Pvt Limited</div>
-                        <div class="timeline-desc" id="exp1Description">Market Sales Representative</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="exp2Title">Previous Role</div>
-                        <div class="timeline-subtitle" id="exp2Company">Savita Oil Technology Limited (Savsol)</div>
-                        <div class="timeline-desc" id="exp2Description">Worked at Savsol prior to current position</div>
-                    </div>
+                    <!-- Will be filled dynamically -->
                 </div>
             </div>
 
@@ -797,7 +712,7 @@
                     </span>
                 </div>
                 <div class="skills-grid" id="skillsContent">
-                    <!-- Skills will be loaded here -->
+                    <!-- Will be filled dynamically -->
                 </div>
             </div>
 
@@ -813,21 +728,7 @@
                     </span>
                 </div>
                 <div class="timeline" id="coursesContent">
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="course1Title">Marketing Management</div>
-                        <div class="timeline-subtitle" id="course1Institution">Indian Institute of Management Bangalore</div>
-                        <div class="timeline-desc" id="course1Description">Advanced marketing strategies and management</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="course2Title">Automatic Service Technician (4 Wheeler)</div>
-                        <div class="timeline-subtitle" id="course2Institution">National Institute Of Open Schooling</div>
-                        <div class="timeline-desc" id="course2Description">Automotive service and repair certification</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-title" id="course3Title">Advanced Diploma in Computer Application</div>
-                        <div class="timeline-subtitle" id="course3Institution">STP Computer Education</div>
-                        <div class="timeline-desc" id="course3Description">Comprehensive computer applications training</div>
-                    </div>
+                    <!-- Will be filled dynamically -->
                 </div>
             </div>
         </div>
@@ -853,9 +754,6 @@
             <div class="auth-error" id="authError">
                 Invalid PIN. Please try again.
             </div>
-            <p style="margin-top: 15px; font-size: 12px; color: var(--gray-text);">
-                <i class="fas fa-info-circle"></i> Try: 1311 (Default PIN)
-            </p>
         </div>
     </div>
 
@@ -882,132 +780,38 @@
 
     <script>
         // ============================================
-        // SECURE ENV CONFIGURATION LOADER
+        // APPLICATION CORE
         // ============================================
         
-        // Load environment configuration from hidden JSON
-        let ENV_CONFIG = null;
-        
-        function loadEnvConfig() {
-            try {
-                const envElement = document.getElementById('envConfig');
-                if (envElement && envElement.textContent) {
-                    // Decode from Base64
-                    const decoded = atob(envElement.textContent.trim());
-                    ENV_CONFIG = JSON.parse(decoded);
-                }
-            } catch (e) {
-                // Fallback to default config if decoding fails
-                ENV_CONFIG = {
-                    PIN: "1311",
-                    BACKUP_PINS: ["2024", "MUZAMIL", "13112024"],
-                    SECURITY_SETTINGS: {
-                        MAX_ATTEMPTS: 3,
-                        LOCKOUT_TIME: 300000, // 5 minutes
-                        SESSION_TIME: 1800000 // 30 minutes
-                    }
-                };
-            }
-            
-            // Ensure we have valid config
-            if (!ENV_CONFIG) {
-                ENV_CONFIG = {
-                    PIN: "1311",
-                    BACKUP_PINS: ["2024", "MUZAMIL", "13112024"],
-                    SECURITY_SETTINGS: {
-                        MAX_ATTEMPTS: 3,
-                        LOCKOUT_TIME: 300000,
-                        SESSION_TIME: 1800000
-                    }
-                };
-            }
-        }
-        
-        // Call this immediately
-        loadEnvConfig();
-        
-        // ============================================
-        // APPLICATION STATE
-        // ============================================
-        
+        // State
         let isAdminMode = false;
         let currentSection = '';
         let adminSessionToken = null;
         let failedAttempts = 0;
         let lockoutTime = 0;
         
-        // Portfolio Data
-        const portfolioData = {
-            profileName: "Muzamil Majeed",
-            profileBio: "MBA Professional | MSR at Brakes India Pvt Limited",
-            profileImage: "https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg",
-            
+        // Portfolio Data Structure
+        let portfolioData = {
+            profileName: "",
+            profileBio: "",
+            profileImage: "",
             contact: {
-                phone: "+917889737018",
-                email: "Muzamilmajeed23@Outlook.com",
-                linkedin: "https://www.linkedin.com/in/muzamil-majeed-9b00361b2",
-                whatsapp: "https://wa.me/+917889737018"
+                phone: "",
+                email: "",
+                linkedin: "",
+                whatsapp: ""
             },
-            
-            education: [
-                {
-                    title: "MBA",
-                    institution: "Maharaja Ranjit Singh Punjab Technical University",
-                    description: "Master of Business Administration"
-                },
-                {
-                    title: "BBA",
-                    institution: "Cluster University Srinagar",
-                    description: "Bachelor of Business Administration"
-                }
-            ],
-            
-            experience: [
-                {
-                    title: "MSR",
-                    company: "Brakes India Pvt Limited",
-                    description: "Market Sales Representative",
-                    isCurrent: true
-                },
-                {
-                    title: "Previous Role",
-                    company: "Savita Oil Technology Limited (Savsol)",
-                    description: "Worked at Savsol prior to current position",
-                    isCurrent: false
-                }
-            ],
-            
-            skills: [
-                "Explorer",
-                "Customer Handling", 
-                "Good Communication Skills",
-                "Customer relationship Management",
-                "Problem Solving"
-            ],
-            
-            courses: [
-                {
-                    title: "Marketing Management",
-                    institution: "Indian Institute of Management Bangalore",
-                    description: "Advanced marketing strategies and management"
-                },
-                {
-                    title: "Automatic Service Technician (4 Wheeler)",
-                    institution: "National Institute Of Open Schooling",
-                    description: "Automotive service and repair certification"
-                },
-                {
-                    title: "Advanced Diploma in Computer Application",
-                    institution: "STP Computer Education",
-                    description: "Comprehensive computer applications training"
-                }
-            ]
+            education: [],
+            experience: [],
+            skills: [],
+            courses: []
         };
         
         // DOM Elements
         const profileName = document.getElementById('profileName');
         const profileBio = document.getElementById('profileBio');
         const profileImage = document.getElementById('profileImage');
+        const contactIcons = document.getElementById('contactIcons');
         const authOverlay = document.getElementById('authOverlay');
         const adminOverlay = document.getElementById('adminOverlay');
         const adminContent = document.getElementById('adminContent');
@@ -1017,6 +821,242 @@
         const lockIcon = document.getElementById('lockIcon');
         const notification = document.getElementById('notification');
         const notificationText = document.getElementById('notificationText');
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // First load config from external file
+            if (window.PORTFOLIO_CONFIG) {
+                console.log("Config loaded successfully");
+            } else {
+                console.error("Config file not loaded!");
+                // Fallback to default config
+                window.PORTFOLIO_CONFIG = {
+                    ADMIN_PIN: "1311",
+                    BACKUP_PINS: ["2024", "MUZAMIL"],
+                    SECURITY: {
+                        MAX_ATTEMPTS: 3,
+                        LOCKOUT_TIME: 300000,
+                        SESSION_TIME: 1800000
+                    },
+                    CONTACT: {
+                        PHONE: "+917889737018",
+                        EMAIL: "Muzamilmajeed23@Outlook.com",
+                        LINKEDIN: "https://www.linkedin.com/in/muzamil-majeed-9b00361b2",
+                        WHATSAPP: "https://wa.me/+917889737018"
+                    },
+                    INITIAL_DATA: {
+                        profileName: "Muzamil Majeed",
+                        profileBio: "MBA Professional | MSR at Brakes India Pvt Limited",
+                        profileImage: "https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg"
+                    }
+                };
+            }
+            
+            // Initialize data
+            initializePortfolioData();
+            loadFromLocalStorage();
+            renderPortfolio();
+            setupEventListeners();
+            
+            // Clear any existing session
+            adminSessionToken = null;
+            isAdminMode = false;
+            hideAllEditButtons();
+        });
+        
+        function initializePortfolioData() {
+            // Start with config data
+            portfolioData.profileName = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileName;
+            portfolioData.profileBio = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileBio;
+            portfolioData.profileImage = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileImage;
+            
+            // Contact info from config
+            portfolioData.contact = {
+                phone: window.PORTFOLIO_CONFIG.CONTACT.PHONE,
+                email: window.PORTFOLIO_CONFIG.CONTACT.EMAIL,
+                linkedin: window.PORTFOLIO_CONFIG.CONTACT.LINKEDIN,
+                whatsapp: window.PORTFOLIO_CONFIG.CONTACT.WHATSAPP
+            };
+            
+            // Default education
+            if (portfolioData.education.length === 0) {
+                portfolioData.education = [
+                    {
+                        title: "MBA",
+                        institution: "Maharaja Ranjit Singh Punjab Technical University",
+                        description: "Master of Business Administration"
+                    },
+                    {
+                        title: "BBA",
+                        institution: "Cluster University Srinagar",
+                        description: "Bachelor of Business Administration"
+                    }
+                ];
+            }
+            
+            // Default experience
+            if (portfolioData.experience.length === 0) {
+                portfolioData.experience = [
+                    {
+                        title: "MSR",
+                        company: "Brakes India Pvt Limited",
+                        description: "Market Sales Representative",
+                        isCurrent: true
+                    },
+                    {
+                        title: "Previous Role",
+                        company: "Savita Oil Technology Limited (Savsol)",
+                        description: "Worked at Savsol prior to current position",
+                        isCurrent: false
+                    }
+                ];
+            }
+            
+            // Default skills
+            if (portfolioData.skills.length === 0) {
+                portfolioData.skills = [
+                    "Explorer",
+                    "Customer Handling", 
+                    "Good Communication Skills",
+                    "Customer relationship Management",
+                    "Problem Solving"
+                ];
+            }
+            
+            // Default courses
+            if (portfolioData.courses.length === 0) {
+                portfolioData.courses = [
+                    {
+                        title: "Marketing Management",
+                        institution: "Indian Institute of Management Bangalore",
+                        description: "Advanced marketing strategies and management"
+                    },
+                    {
+                        title: "Automatic Service Technician (4 Wheeler)",
+                        institution: "National Institute Of Open Schooling",
+                        description: "Automotive service and repair certification"
+                    },
+                    {
+                        title: "Advanced Diploma in Computer Application",
+                        institution: "STP Computer Education",
+                        description: "Comprehensive computer applications training"
+                    }
+                ];
+            }
+        }
+        
+        // ============================================
+        // RENDERING FUNCTIONS
+        // ============================================
+        
+        function renderPortfolio() {
+            // Profile info
+            profileName.textContent = portfolioData.profileName;
+            profileBio.textContent = portfolioData.profileBio;
+            profileImage.src = portfolioData.profileImage;
+            
+            // Contact icons
+            renderContactIcons();
+            
+            // Education
+            renderEducation();
+            
+            // Experience
+            renderExperience();
+            
+            // Skills
+            renderSkills();
+            
+            // Courses
+            renderCourses();
+        }
+        
+        function renderContactIcons() {
+            contactIcons.innerHTML = `
+                <a href="tel:${portfolioData.contact.phone}" class="contact-icon" title="Call">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="mailto:${portfolioData.contact.email}" class="contact-icon" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="${portfolioData.contact.linkedin}" 
+                   target="_blank" 
+                   class="contact-icon" 
+                   title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="${portfolioData.contact.whatsapp}" 
+                   target="_blank" 
+                   class="contact-icon" 
+                   title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            `;
+        }
+        
+        function renderEducation() {
+            const container = document.getElementById('educationContent');
+            container.innerHTML = '';
+            
+            portfolioData.education.forEach((edu, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <div class="timeline-title" id="edu${index+1}Title">${edu.title}</div>
+                    <div class="timeline-subtitle" id="edu${index+1}Institution">${edu.institution}</div>
+                    <div class="timeline-desc" id="edu${index+1}Description">${edu.description}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        function renderExperience() {
+            const container = document.getElementById('experienceContent');
+            container.innerHTML = '';
+            
+            portfolioData.experience.forEach((exp, index) => {
+                const company = exp.isCurrent ? `${exp.company} (Current)` : exp.company;
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <div class="timeline-title" id="exp${index+1}Title">${exp.title}</div>
+                    <div class="timeline-subtitle" id="exp${index+1}Company">${company}</div>
+                    <div class="timeline-desc" id="exp${index+1}Description">${exp.description}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+        
+        function renderSkills() {
+            const container = document.getElementById('skillsContent');
+            container.innerHTML = '';
+            
+            portfolioData.skills.forEach(skill => {
+                const skillTag = document.createElement('div');
+                skillTag.className = 'skill-tag';
+                skillTag.textContent = skill;
+                container.appendChild(skillTag);
+            });
+        }
+        
+        function renderCourses() {
+            const container = document.getElementById('coursesContent');
+            container.innerHTML = '';
+            
+            portfolioData.courses.forEach((course, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+                item.innerHTML = `
+                    <div class="timeline-title" id="course${index+1}Title">${course.title}</div>
+                    <div class="timeline-subtitle" id="course${index+1}Institution">${course.institution}</div>
+                    <div class="timeline-desc" id="course${index+1}Description">${course.description}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
         
         // ============================================
         // SECURITY FUNCTIONS
@@ -1041,90 +1081,16 @@
         }
         
         function isValidPin(pin) {
-            if (!ENV_CONFIG) loadEnvConfig();
+            const config = window.PORTFOLIO_CONFIG;
             
             // Check main PIN
-            if (pin === ENV_CONFIG.PIN) return true;
+            if (pin === config.ADMIN_PIN) return true;
             
             // Check backup PINs
-            if (ENV_CONFIG.BACKUP_PINS && ENV_CONFIG.BACKUP_PINS.includes(pin)) return true;
+            if (config.BACKUP_PINS && config.BACKUP_PINS.includes(pin)) return true;
             
-            // Special case: pin is number, check as string too
-            if (pin.toString() === ENV_CONFIG.PIN) return true;
-            
-            // Additional fallback checks
-            const validPins = ["1311", "2024", "MUZAMIL", "13112024"];
-            return validPins.includes(pin);
-        }
-        
-        // ============================================
-        // INITIALIZATION
-        // ============================================
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            loadPortfolioData();
-            renderSkills();
-            
-            // Profile image loading
-            profileImage.classList.add('loading');
-            
-            // Multiple secret access methods
-            setupSecretAccess();
-            
-            // Load from localStorage
-            loadFromLocalStorage();
-            
-            // Clear any existing session
-            adminSessionToken = null;
-            isAdminMode = false;
-            hideAllEditButtons();
-            
-            // Profile image handlers
-            profileImage.onload = function() {
-                this.classList.remove('loading');
-            };
-            
-            profileImage.onerror = function() {
-                this.classList.remove('loading');
-                this.src = 'https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg';
-            };
-        });
-        
-        function setupSecretAccess() {
-            // 1. Long press on profile name (3 seconds)
-            let pressTimer;
-            profileName.addEventListener('mousedown', () => {
-                pressTimer = setTimeout(showAuthPanel, 3000);
-            });
-            profileName.addEventListener('mouseup', () => clearTimeout(pressTimer));
-            profileName.addEventListener('mouseleave', () => clearTimeout(pressTimer));
-            
-            // 2. Click lock icon
-            lockIcon.addEventListener('click', showAuthPanel);
-            
-            // 3. Triple tap on profile picture
-            let tapCount = 0;
-            let tapTimer;
-            profileImage.addEventListener('click', function() {
-                tapCount++;
-                if (tapTimer) clearTimeout(tapTimer);
-                
-                tapTimer = setTimeout(() => {
-                    if (tapCount === 3) showAuthPanel();
-                    tapCount = 0;
-                }, 500);
-            });
-            
-            // 4. Hidden corner click
-            document.getElementById('secretAdminArea').addEventListener('click', showAuthPanel);
-            
-            // 5. Keyboard shortcut: Ctrl+Alt+M
-            document.addEventListener('keydown', (e) => {
-                if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'm') {
-                    e.preventDefault();
-                    showAuthPanel();
-                }
-            });
+            // Additional fallback
+            return ["1311", "2024", "MUZAMIL", "13112024"].includes(pin);
         }
         
         // ============================================
@@ -1175,7 +1141,7 @@
                 showNotification('Admin access granted. Session valid for 30 minutes.', 'success');
                 
                 // Auto logout after session time
-                const sessionTime = ENV_CONFIG?.SECURITY_SETTINGS?.SESSION_TIME || 1800000;
+                const sessionTime = window.PORTFOLIO_CONFIG.SECURITY.SESSION_TIME;
                 setTimeout(() => {
                     if (isAdminMode) {
                         logoutAdmin();
@@ -1186,7 +1152,7 @@
             } else {
                 // Failed attempt
                 failedAttempts++;
-                const maxAttempts = ENV_CONFIG?.SECURITY_SETTINGS?.MAX_ATTEMPTS || 3;
+                const maxAttempts = window.PORTFOLIO_CONFIG.SECURITY.MAX_ATTEMPTS;
                 authError.textContent = `Invalid PIN. ${maxAttempts - failedAttempts} attempts remaining`;
                 authError.style.display = 'block';
                 
@@ -1201,7 +1167,7 @@
                 
                 // Check for lockout
                 if (failedAttempts >= maxAttempts) {
-                    const lockoutTimeMs = ENV_CONFIG?.SECURITY_SETTINGS?.LOCKOUT_TIME || 300000;
+                    const lockoutTimeMs = window.PORTFOLIO_CONFIG.SECURITY.LOCKOUT_TIME;
                     lockoutTime = Date.now() + lockoutTimeMs;
                     authOverlay.style.display = 'none';
                     showNotification('Too many failed attempts. Locked for 5 minutes.', 'error');
@@ -1227,60 +1193,6 @@
             // Clear any open panels
             authOverlay.style.display = 'none';
             adminOverlay.style.display = 'none';
-        }
-        
-        // ============================================
-        // PORTFOLIO FUNCTIONS
-        // ============================================
-        
-        function loadPortfolioData() {
-            // Profile info
-            profileName.textContent = portfolioData.profileName;
-            profileBio.textContent = portfolioData.profileBio;
-            profileImage.src = portfolioData.profileImage;
-            
-            // Education
-            document.getElementById('edu1Title').textContent = portfolioData.education[0].title;
-            document.getElementById('edu1Institution').textContent = portfolioData.education[0].institution;
-            document.getElementById('edu1Description').textContent = portfolioData.education[0].description;
-            
-            document.getElementById('edu2Title').textContent = portfolioData.education[1].title;
-            document.getElementById('edu2Institution').textContent = portfolioData.education[1].institution;
-            document.getElementById('edu2Description').textContent = portfolioData.education[1].description;
-            
-            // Experience
-            document.getElementById('exp1Title').textContent = portfolioData.experience[0].title;
-            document.getElementById('exp1Company').textContent = portfolioData.experience[0].company;
-            document.getElementById('exp1Description').textContent = portfolioData.experience[0].description;
-            
-            document.getElementById('exp2Title').textContent = portfolioData.experience[1].title;
-            document.getElementById('exp2Company').textContent = portfolioData.experience[1].company;
-            document.getElementById('exp2Description').textContent = portfolioData.experience[1].description;
-            
-            // Courses
-            document.getElementById('course1Title').textContent = portfolioData.courses[0].title;
-            document.getElementById('course1Institution').textContent = portfolioData.courses[0].institution;
-            document.getElementById('course1Description').textContent = portfolioData.courses[0].description;
-            
-            document.getElementById('course2Title').textContent = portfolioData.courses[1].title;
-            document.getElementById('course2Institution').textContent = portfolioData.courses[1].institution;
-            document.getElementById('course2Description').textContent = portfolioData.courses[1].description;
-            
-            document.getElementById('course3Title').textContent = portfolioData.courses[2].title;
-            document.getElementById('course3Institution').textContent = portfolioData.courses[2].institution;
-            document.getElementById('course3Description').textContent = portfolioData.courses[2].description;
-        }
-        
-        function renderSkills() {
-            const skillsContainer = document.getElementById('skillsContent');
-            skillsContainer.innerHTML = '';
-            
-            portfolioData.skills.forEach(skill => {
-                const skillTag = document.createElement('div');
-                skillTag.className = 'skill-tag';
-                skillTag.textContent = skill;
-                skillsContainer.appendChild(skillTag);
-            });
         }
         
         // ============================================
@@ -1448,7 +1360,7 @@
             portfolioData.education[1].institution = document.getElementById('editEdu2Institution').value;
             portfolioData.education[1].description = document.getElementById('editEdu2Description').value;
             
-            loadPortfolioData();
+            renderPortfolio();
             closeAdminPanel();
             showNotification('Education updated successfully!', 'success');
             saveToLocalStorage();
@@ -1463,7 +1375,7 @@
             portfolioData.experience[1].company = document.getElementById('editExp2Company').value;
             portfolioData.experience[1].description = document.getElementById('editExp2Description').value;
             
-            loadPortfolioData();
+            renderPortfolio();
             closeAdminPanel();
             showNotification('Experience updated successfully!', 'success');
             saveToLocalStorage();
@@ -1494,7 +1406,7 @@
             portfolioData.courses[2].institution = document.getElementById('editCourse3Institution').value;
             portfolioData.courses[2].description = document.getElementById('editCourse3Description').value;
             
-            loadPortfolioData();
+            renderPortfolio();
             closeAdminPanel();
             showNotification('Certifications updated successfully!', 'success');
             saveToLocalStorage();
@@ -1553,9 +1465,7 @@
                 const savedData = localStorage.getItem('muzamilPortfolioData');
                 if (savedData) {
                     const parsedData = JSON.parse(savedData);
-                    Object.assign(portfolioData, parsedData);
-                    loadPortfolioData();
-                    renderSkills();
+                    portfolioData = parsedData;
                 }
             } catch (e) {
                 console.log('No saved data found');
@@ -1563,39 +1473,91 @@
         }
         
         // ============================================
-        // EVENT LISTENERS
+        // EVENT LISTENERS SETUP
         // ============================================
         
-        // Close panels when clicking outside
-        authOverlay.addEventListener('click', function(e) {
-            if (e.target === authOverlay) {
-                authOverlay.style.display = 'none';
-            }
-        });
+        function setupEventListeners() {
+            // Secret access methods
+            setupSecretAccess();
+            
+            // Profile image handlers
+            profileImage.onload = function() {
+                this.classList.remove('loading');
+            };
+            
+            profileImage.onerror = function() {
+                this.classList.remove('loading');
+                this.src = 'https://via.placeholder.com/150/121212/ffffff?text=M';
+            };
+            
+            // Close panels when clicking outside
+            authOverlay.addEventListener('click', function(e) {
+                if (e.target === authOverlay) {
+                    authOverlay.style.display = 'none';
+                }
+            });
+            
+            adminOverlay.addEventListener('click', function(e) {
+                if (e.target === adminOverlay) {
+                    closeAdminPanel();
+                }
+            });
+            
+            // Enter key support
+            adminCodeInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyAdminCode();
+                }
+            });
+            
+            // Auto-focus on code input
+            adminCodeInput.addEventListener('focus', function() {
+                this.select();
+            });
+            
+            // Clear session on page unload
+            window.addEventListener('beforeunload', function() {
+                adminSessionToken = null;
+                isAdminMode = false;
+            });
+        }
         
-        adminOverlay.addEventListener('click', function(e) {
-            if (e.target === adminOverlay) {
-                closeAdminPanel();
-            }
-        });
-        
-        // Enter key support
-        adminCodeInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                verifyAdminCode();
-            }
-        });
-        
-        // Auto-focus on code input
-        adminCodeInput.addEventListener('focus', function() {
-            this.select();
-        });
-        
-        // Clear session on page unload
-        window.addEventListener('beforeunload', function() {
-            adminSessionToken = null;
-            isAdminMode = false;
-        });
+        function setupSecretAccess() {
+            // 1. Long press on profile name
+            let pressTimer;
+            profileName.addEventListener('mousedown', () => {
+                pressTimer = setTimeout(showAuthPanel, 3000);
+            });
+            profileName.addEventListener('mouseup', () => clearTimeout(pressTimer));
+            profileName.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+            
+            // 2. Click lock icon
+            lockIcon.addEventListener('click', showAuthPanel);
+            
+            // 3. Triple tap on profile picture
+            let tapCount = 0;
+            let tapTimer;
+            profileImage.addEventListener('click', function() {
+                tapCount++;
+                if (tapTimer) clearTimeout(tapTimer);
+                
+                tapTimer = setTimeout(() => {
+                    if (tapCount === 3) showAuthPanel();
+                    tapCount = 0;
+                }, 500);
+            });
+            
+            // 4. Hidden corner click
+            document.getElementById('secretAdminArea').addEventListener('click', showAuthPanel);
+            
+            // 5. Keyboard shortcut
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'm') {
+                    e.preventDefault();
+                    showAuthPanel();
+                }
+            });
+        }
     </script>
 </body>
 </html>
