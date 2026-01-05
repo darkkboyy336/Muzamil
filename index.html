@@ -743,10 +743,8 @@
                 <input type="password" 
                        class="auth-input" 
                        id="adminCode" 
-                       placeholder="Enter 4-digit PIN"
-                       maxlength="4"
-                       autocomplete="off"
-                       inputmode="numeric">
+                       placeholder="Enter PIN from environment"
+                       autocomplete="off">
             </div>
             <button class="auth-btn" onclick="verifyAdminCode()">
                 <i class="fas fa-lock-open"></i> Verify PIN
@@ -830,29 +828,17 @@
             // First load config from external file
             if (window.PORTFOLIO_CONFIG) {
                 console.log("Config loaded successfully");
+                console.log("Environment PIN available:", window.PORTFOLIO_CONFIG.ADMIN_PIN ? "Yes" : "No");
             } else {
                 console.error("Config file not loaded!");
-                // Fallback to default config
-                window.PORTFOLIO_CONFIG = {
-                    ADMIN_PIN: "1311",
-                    BACKUP_PINS: ["2024", "MUZAMIL"],
-                    SECURITY: {
-                        MAX_ATTEMPTS: 3,
-                        LOCKOUT_TIME: 300000,
-                        SESSION_TIME: 1800000
-                    },
-                    CONTACT: {
-                        PHONE: "+917889737018",
-                        EMAIL: "Muzamilmajeed23@Outlook.com",
-                        LINKEDIN: "https://www.linkedin.com/in/muzamil-majeed-9b00361b2",
-                        WHATSAPP: "https://wa.me/+917889737018"
-                    },
-                    INITIAL_DATA: {
-                        profileName: "Muzamil Majeed",
-                        profileBio: "MBA Professional | MSR at Brakes India Pvt Limited",
-                        profileImage: "https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg"
-                    }
-                };
+                showNotification("Configuration file not found. Please check config.env.js", "error");
+                return;
+            }
+            
+            // Check if admin PIN is configured
+            if (!window.PORTFOLIO_CONFIG.ADMIN_PIN) {
+                console.error("Admin PIN not configured in environment!");
+                showNotification("Admin PIN not configured. Please set ADMIN_PIN in config.env.js", "error");
             }
             
             // Initialize data
@@ -868,17 +854,23 @@
         });
         
         function initializePortfolioData() {
+            // Check if config exists
+            if (!window.PORTFOLIO_CONFIG) {
+                console.error("PORTFOLIO_CONFIG not found!");
+                return;
+            }
+            
             // Start with config data
-            portfolioData.profileName = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileName;
-            portfolioData.profileBio = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileBio;
-            portfolioData.profileImage = window.PORTFOLIO_CONFIG.INITIAL_DATA.profileImage;
+            portfolioData.profileName = window.PORTFOLIO_CONFIG.INITIAL_DATA?.profileName || "Muzamil Majeed";
+            portfolioData.profileBio = window.PORTFOLIO_CONFIG.INITIAL_DATA?.profileBio || "MBA Professional | MSR at Brakes India Pvt Limited";
+            portfolioData.profileImage = window.PORTFOLIO_CONFIG.INITIAL_DATA?.profileImage || "https://i.ibb.co/ZRbTbg3B/IMG-20251221-WA0012.jpg";
             
             // Contact info from config
             portfolioData.contact = {
-                phone: window.PORTFOLIO_CONFIG.CONTACT.PHONE,
-                email: window.PORTFOLIO_CONFIG.CONTACT.EMAIL,
-                linkedin: window.PORTFOLIO_CONFIG.CONTACT.LINKEDIN,
-                whatsapp: window.PORTFOLIO_CONFIG.CONTACT.WHATSAPP
+                phone: window.PORTFOLIO_CONFIG.CONTACT?.PHONE || "+917889737018",
+                email: window.PORTFOLIO_CONFIG.CONTACT?.EMAIL || "Muzamilmajeed23@Outlook.com",
+                linkedin: window.PORTFOLIO_CONFIG.CONTACT?.LINKEDIN || "https://www.linkedin.com/in/muzamil-majeed-9b00361b2",
+                whatsapp: window.PORTFOLIO_CONFIG.CONTACT?.WHATSAPP || "https://wa.me/+917889737018"
             };
             
             // Default education
@@ -1081,16 +1073,17 @@
         }
         
         function isValidPin(pin) {
-            const config = window.PORTFOLIO_CONFIG;
+            // Get PIN from environment config
+            const envPin = window.PORTFOLIO_CONFIG?.ADMIN_PIN;
             
-            // Check main PIN
-            if (pin === config.ADMIN_PIN) return true;
+            if (!envPin) {
+                console.error("No ADMIN_PIN configured in environment");
+                showNotification("Admin PIN not configured. Please check config file.", "error");
+                return false;
+            }
             
-            // Check backup PINs
-            if (config.BACKUP_PINS && config.BACKUP_PINS.includes(pin)) return true;
-            
-            // Additional fallback
-            return ["1311", "2024", "MUZAMIL", "13112024"].includes(pin);
+            // Check against environment PIN only
+            return pin === envPin;
         }
         
         // ============================================
@@ -1099,6 +1092,12 @@
         
         function showAuthPanel() {
             if (isLockedOut()) return;
+            
+            // Check if environment is properly loaded
+            if (!window.PORTFOLIO_CONFIG || !window.PORTFOLIO_CONFIG.ADMIN_PIN) {
+                showNotification("Admin system not configured. Please check config file.", "error");
+                return;
+            }
             
             authOverlay.style.display = 'flex';
             adminCodeInput.value = '';
@@ -1116,6 +1115,13 @@
             }
             
             if (isLockedOut()) return;
+            
+            // Check environment config
+            if (!window.PORTFOLIO_CONFIG || !window.PORTFOLIO_CONFIG.ADMIN_PIN) {
+                authError.textContent = 'Admin system not configured';
+                authError.style.display = 'block';
+                return;
+            }
             
             if (isValidPin(code)) {
                 // Success
@@ -1141,7 +1147,7 @@
                 showNotification('Admin access granted. Session valid for 30 minutes.', 'success');
                 
                 // Auto logout after session time
-                const sessionTime = window.PORTFOLIO_CONFIG.SECURITY.SESSION_TIME;
+                const sessionTime = window.PORTFOLIO_CONFIG.SECURITY?.SESSION_TIME || 1800000;
                 setTimeout(() => {
                     if (isAdminMode) {
                         logoutAdmin();
@@ -1152,7 +1158,7 @@
             } else {
                 // Failed attempt
                 failedAttempts++;
-                const maxAttempts = window.PORTFOLIO_CONFIG.SECURITY.MAX_ATTEMPTS;
+                const maxAttempts = window.PORTFOLIO_CONFIG.SECURITY?.MAX_ATTEMPTS || 3;
                 authError.textContent = `Invalid PIN. ${maxAttempts - failedAttempts} attempts remaining`;
                 authError.style.display = 'block';
                 
@@ -1167,7 +1173,7 @@
                 
                 // Check for lockout
                 if (failedAttempts >= maxAttempts) {
-                    const lockoutTimeMs = window.PORTFOLIO_CONFIG.SECURITY.LOCKOUT_TIME;
+                    const lockoutTimeMs = window.PORTFOLIO_CONFIG.SECURITY?.LOCKOUT_TIME || 300000;
                     lockoutTime = Date.now() + lockoutTimeMs;
                     authOverlay.style.display = 'none';
                     showNotification('Too many failed attempts. Locked for 5 minutes.', 'error');
